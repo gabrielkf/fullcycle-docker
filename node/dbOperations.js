@@ -48,14 +48,10 @@ function getPeople() {
     const connection = dbConnection();
 
     connection.query(`SELECT * FROM ${TABLE_NAME}`, (err, rows) => {
-      console.log(rows);
       if (err || !rows) reject('Error consulting database');
 
-      const people = rows.map(person => `<li>${person.name}</li>`);
-      console.log(people);
-
       connection.end();
-
+      const people = rows.map(person => `<li>${person.name}</li>`);
       resolve(`<ul>${people.join('')}</ul>`);
     });
   });

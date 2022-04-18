@@ -7,11 +7,11 @@ const {
 
 const PORT = 3030;
 const PERSON = 'Michael Jackson the King';
-createTable();
 
 const app = express();
 
 app.get('/', (req, res) => {
+  createTable();
   insertPerson(PERSON);
 
   return getPeople()
