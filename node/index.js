@@ -1,12 +1,26 @@
 const express = require('express');
+const {
+  createTable,
+  insertPerson,
+  getPeople,
+} = require('./dbOperations');
+
+const PORT = 3030;
+const PERSON = 'Michael Jackson the King';
+createTable();
 
 const app = express();
-const port = 3030;
 
 app.get('/', (req, res) => {
-  res.send('<h1>Full Cycle</h1>');
+  insertPerson(PERSON);
+
+  return getPeople()
+    .then(peopleList =>
+      res.send(`<h1>Full Cycle Rocks!</h1>${peopleList}`)
+    )
+    .catch(message => res.send(`<p>${message}</p>`));
 });
 
-app.listen(port, () => {
-  console.log(`Running on localhost:${port}`);
+app.listen(PORT, () => {
+  console.log(`Running on localhost:${PORT}`);
 });
